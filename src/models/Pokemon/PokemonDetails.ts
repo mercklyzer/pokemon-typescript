@@ -24,23 +24,23 @@ export class PokemonDetails {
     genre:string;
 
     constructor(pokemon:IPokemon, species:IPokemonSpecies){
-        this.id = pokemon.id,
-        this.name = pokemon.N,
-        this.image = pokemon.thumbnail,
+        this.id = pokemon.id;
+        this.name = pokemon.N;
+        this.image = pokemon.thumbnail;
         
-        this.height = pokemon.H,
-        this.weight = pokemon.W,
-        this.types = pokemon.T,
-        this.abilities = pokemon.Ab,
+        this.height = pokemon.H;
+        this.weight = pokemon.W;
+        this.types = pokemon.T;
+        this.abilities = pokemon.Ab;
         
-        this.hp = pokemon.St[0]['bs'], 
-        this.attack = pokemon.St[1]['bs'], 
-        this.defense = pokemon.St[2]['bs'], 
-        this.spAttack = pokemon.St[3]['bs'], 
-        this.spDefense = pokemon.St[4]['bs'],
-        this.speed = pokemon.St[5]['bs'],
+        this.hp = pokemon.St[0]['bs'];
+        this.attack = pokemon.St[1]['bs'];
+        this.defense = pokemon.St[2]['bs'];
+        this.spAttack = pokemon.St[3]['bs'];
+        this.spDefense = pokemon.St[4]['bs'];
+        this.speed = pokemon.St[5]['bs'];
 
-        this.color = species.Co,
+        this.color = species.Co;
         this.genre = species.G
     }
 }
