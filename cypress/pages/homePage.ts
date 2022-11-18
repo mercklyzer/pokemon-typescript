@@ -1,13 +1,24 @@
+import { Navbar, NavbarElements } from "./navbar";
+
 interface PokemonImageProps{
     width?:number;
     height?:number;
     device?:Cypress.ViewportPreset;
 }
 
-export class HomePage {
-    elements = {
-        navbar: () => cy.get('nav'),
-        pokemonLogo: () => cy.get('nav [data-test="pokemon logo"]'),
+interface HomePageElements {
+    title: () => Cypress.Chainable
+    subtitle: () => Cypress.Chainable
+    playGameBtn: () => Cypress.Chainable
+    pokemonsListBtn: () => Cypress.Chainable
+    pokemonImage: ({width, height, device}:PokemonImageProps) => Cypress.Chainable
+}
+
+type HomePageAllElements = NavbarElements & HomePageElements
+
+export class HomePage extends Navbar{
+    elements:HomePageAllElements = {
+        ...this.elements,
         title: () => cy.get('[data-test="title"]'),
         subtitle: () => cy.get('[data-test="subtitle"]'),
         playGameBtn: () => cy.get('[data-test="play-game-btn"]'),

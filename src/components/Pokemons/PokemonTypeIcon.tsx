@@ -11,7 +11,7 @@ interface Props {
 const PokemonTypeIcon:React.FC<Props> = ({type, onClick}) => {
     const uniqueId = nanoid(5);
     return (
-        <div data-tip data-for={`${uniqueId}-${type}-filter-icon`} className={`${getPokemonTypeColor(type)} rounded-full p-1 flex justify-center items-center w-6 h-6 cursor-pointer
+        <div data-test={`pokemon-${type}-icon`} data-tip data-for={`${uniqueId}-${type}-filter-icon`} className={`${getPokemonTypeColor(type)} rounded-full p-1 flex justify-center items-center w-6 h-6 cursor-pointer
             ${getPokemonTypeShadow(type)}
             hover:scale-[1.1] duration-200
             hover:saturate-[200%]

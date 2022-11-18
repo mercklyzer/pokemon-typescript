@@ -17,7 +17,8 @@ const PokemonCard:React.FC<Props> = ({id, name, types, thumbnail, onPokemonTypeI
         <div className="border-2 border-gray-300 p-1 flex flex-col cursor-pointer
             hover:bg-gray-200 duration-200
             md:p-2" 
-            onClick={() => navigate(`/pokemons/${id}`)}>
+            onClick={() => navigate(`/pokemons/${id}`)}
+            data-test="pokemon-card">
             <div className="flex">
                 <div className="flex-1 flex flex-col">
                     <h1 className="font-bold text-zinc-500 text-lg

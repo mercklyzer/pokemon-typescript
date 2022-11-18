@@ -11,7 +11,6 @@ describe('home page', () => {
     })
 
     it('Displaying navbar and only showing pokemon logo', () => {
-        
         homePage
             .elements.navbar()
             .should('be.visible')

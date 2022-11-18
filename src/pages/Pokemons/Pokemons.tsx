@@ -88,18 +88,18 @@ const Pokemons:React.FC = () => {
     return (
         <Padding>
             <div className='flex justify-center'>
-                <div className='grid grid-cols-6 gap-x-4 gap-y-2
+                <div data-test="pokemon-type-filter" className='grid grid-cols-6 gap-x-4 gap-y-2
                     sm:grid-cols-8
-                    lg:grid-cols-9 '>
+                    lg:grid-cols-9'>
                     {POKEMON_TYPES.map((type) => <PokemonTypeIcon key={type} type={type} onClick={(e) => handlePokemonTypeIconClick(e, type)}/>)}
                 </div>
             </div>
             <div className='flex justify-center items-center mt-4'>
-                <button onClick={() => clearFilters()}
+                <button onClick={() => clearFilters()} data-test="clear-filters-btn"
                     className="bg-black text-white rounded-xl px-2 py-1
                         md:px-4 lg:py-2 lg:rounded-2xl">Clear Filters</button>
             </div>
-            <div className='flex my-4 items-center'>
+            <div className='flex my-4 items-center' data-test="pokemon-filtered-type">
                 <span className='mr-2 text-gray-600 font-bold text-lg'>Type: </span>
                 {pokemonTypeFilter !== ''? <PokemonTypeCard type={pokemonTypeFilter}/>: <span className='text-gray-600 text-lg'>All</span>}
             </div>
@@ -115,7 +115,7 @@ const Pokemons:React.FC = () => {
             </div>
         
             <div className='flex justify-center items-center w-full'>
-                {isSuccess && displayedPokemons.length === 0 && <div>No pokemons to be displayed.</div>}
+                {isSuccess && displayedPokemons.length === 0 && <div data-test="no-pokemons-displayed">No pokemons to be displayed.</div>}
                 {isFetching && <Oval
                     height={60}
                     width={60}
