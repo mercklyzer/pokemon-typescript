@@ -18,10 +18,10 @@ const Navbar:React.FC = () => {
             lg:h-[80px]'>
                 <div className={`flex-1 flex items-center ${pathname !== '/' && 'bg-green-primary'}`}>
                     <Padding className="flex-1">
-                        <img src={PokemonLogo} onClick={() => navigate("/")}
+                        <img src={PokemonLogo} onClick={() => navigate("/")} data-test="pokemon logo"
                             className='h-8 cursor-pointer
                             md:h-12
-                            lg:h-14' />
+                            lg:h-14'/>
                     </Padding>
                 </div>
                 

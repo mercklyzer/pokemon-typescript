@@ -11,18 +11,20 @@ const Home:React.FC = () => {
             <div className="flex flex-1">
                 <Margin className="flex flex-col items-center justify-center pb-[60px]">
                     <h1 className="font-bold text-2xl mb-4
-                        md:text-4xl md:mb-8">
+                        md:text-4xl md:mb-8"
+                        data-test="title">
                         Who's That Pokemon?
                     </h1>
                     <p className="text-center mb-8
-                        md:text-lg md:mb-12">
+                        md:text-lg md:mb-12"
+                        data-test="subtitle">
                         Do you have what it takes to be the next Pokemon Master? Let's put your skills to test! Identify as many pokemons as you can.
                     </p>
                     <div>
                         <button className="px-4 py-2 bg-black text-white rounded-xl text-sm mr-2
-                            md:text-lg md:mr-6" onClick={() => navigate('/game')}>Play Game</button>
+                            md:text-lg md:mr-6" onClick={() => navigate('/game')} data-test="play-game-btn">Play Game</button>
                         <button className="px-4 py-2 bg-black text-white rounded-xl text-sm
-                            md:text-lg" onClick={() => navigate('/pokemons?type=&name=')}>Pokemons</button>
+                            md:text-lg" onClick={() => navigate('/pokemons?type=&name=')} data-test="pokemons-list-btn">Pokemons</button>
                     </div>
                 </Margin>
             </div>
@@ -31,7 +33,8 @@ const Home:React.FC = () => {
                  lg:flex">
                 <div className="p-32 relative">
                     <img className="z-50 animate-bounce" alt="Charizard" 
-                        src={Charizard} />
+                        src={Charizard} 
+                        data-test="pokemon-image"/>
                 </div>
             </div>
         </div>
