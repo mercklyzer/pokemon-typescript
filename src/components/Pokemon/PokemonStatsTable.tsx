@@ -11,7 +11,7 @@ interface Props {
     id:        number
 }
 
-const PokemonStatusTable:React.FC<Props> = ({hp, attack, defense, spAttack, spDefense, speed, id}) => {
+const PokemonStatsTable:React.FC<Props> = ({hp, attack, defense, spAttack, spDefense, speed, id}) => {
     const [statsType, setStatsType] = useState('base');
     let displayHp!:          number, 
         displayAttack!:      number, 
@@ -44,20 +44,20 @@ const PokemonStatusTable:React.FC<Props> = ({hp, attack, defense, spAttack, spDe
 
 
     return (
-        <div className="flex items-center w-full justify-center statsDiv">
+        <div className="flex items-center w-full justify-center statsDiv" data-test="pokemon-stats-table">
             <div className="inner">           
                 <table className="">
                     <tbody>
                         <tr>
                             <td></td>
                             <td><button className={`p-1 ${statsType === 'base'? 'bg-blue-700 text-white' : 'border-blue-700 border-2 text-slate-600'} font-semibold rounded-lg mr-6
-                                lg:p-2 lg:rounded-2xl`} onClick={() => setStatsType('base')}>Base</button></td>
+                                lg:p-2 lg:rounded-2xl`} onClick={() => setStatsType('base')} data-test="base-btn">Base</button></td>
                             <td><button className={`p-1 ${statsType === 'min'? 'bg-blue-700 text-white' : 'border-blue-700 border-2 text-slate-600'} font-semibold rounded-lg mr-6
-                                lg:p-2 lg:rounded-2xl`} onClick={() => setStatsType('min')}>Min</button></td>
+                                lg:p-2 lg:rounded-2xl`} onClick={() => setStatsType('min')} data-test="min-btn">Min</button></td>
                             <td><button className={`p-1 ${statsType === 'max'? 'bg-blue-700 text-white' : 'border-blue-700 border-2 text-slate-600'} font-semibold rounded-lg
-                                lg:p-2 lg:rounded-2xl`} onClick={() => setStatsType('max')}>Max</button></td>
+                                lg:p-2 lg:rounded-2xl`} onClick={() => setStatsType('max')} data-test="max-btn">Max</button></td>
                         </tr>
-                        <tr>
+                        <tr data-test="hp">
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">HP</td>
                             <td className="text-slate-600 font-medium text-lg" colSpan={3}>
@@ -66,42 +66,42 @@ const PokemonStatusTable:React.FC<Props> = ({hp, attack, defense, spAttack, spDe
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-test="attack">
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Attack</td>
                             <td className="text-slate-600 font-medium text-lg py-2" colSpan={3}>
                                 <ProgressBar completed={displayAttack} maxCompleted={displayMax} customLabel={`${displayAttack}`} bgColor='#B8C370' animateOnRender={true}/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-test="defense">
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Defense</td>
                             <td className="text-slate-600 font-medium text-lg py-2" colSpan={3}>
                                 <ProgressBar completed={displayDefense} maxCompleted={displayMax} customLabel={`${displayDefense}`} bgColor='#B8C370' animateOnRender={true}/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-test="spAttack">
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Sp. Attack</td>
                             <td className="text-slate-600 font-medium text-lg py-2" colSpan={3}>
                                 <ProgressBar completed={displaySpAttack} maxCompleted={displayMax} customLabel={`${displaySpAttack}`} bgColor='#B8C370' animateOnRender={true}/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-test="spDefense">
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Sp. Defense</td>
                             <td className="text-slate-600 font-medium text-lg py-2" colSpan={3}>
                                 <ProgressBar completed={displaySpDefense} maxCompleted={displayMax} customLabel={`${displaySpDefense}`} bgColor='#B8C370' animateOnRender={true}/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-test="speed">
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Speed</td>
                             <td className="text-slate-600 font-medium text-lg py-2" colSpan={3}>
                                 <ProgressBar completed={displaySpeed} maxCompleted={displayMax} customLabel={`${displaySpeed}`} bgColor='#B8C370' animateOnRender={true}/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-test="total">
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Total</td>
                             <td className="text-slate-600 font-medium text-lg py-2" colSpan={3}>
@@ -149,4 +149,4 @@ const calculateMinStats = (stats:number[], id:number) => {
     return [...minStats, Math.max(...minStats)];
 }
 
-export default PokemonStatusTable;
+export default PokemonStatsTable;

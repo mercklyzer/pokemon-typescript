@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import PokemonBasicInfoTable from "../../components/Pokemon/PokemonBasicInfoTable";
-import PokemonStatusTable from "../../components/Pokemon/PokemonStatusTable";
+import PokemonStatsTable from "../../components/Pokemon/PokemonStatsTable";
 import Padding from "../../components/shared/Padding";
 import { usePokemonQuery, usePokemonSpecies } from "../../react-query/pokemonQuery";
 import getPokemonGenreColor from "../../utils/getPokemonGenreColor";
@@ -42,11 +42,16 @@ const Pokemon = () => {
                 {constructedPokemon && 
                 <div className="flex flex-col items-center justify-center w-full">
                     <h1 className="font-medium text-2xl uppercase text-gray-600
-                        md:text-4xl md:font-semibold">{constructedPokemon.name}</h1>
-                    {constructedPokemon.color && <span className={`
-                        ${getPokemonGenreColor(constructedPokemon.color)}
-                        px-2 rounded-lg text-white mt-1
-                        md:mt-2`}>{constructedPokemon.genre}</span>}
+                        md:text-4xl md:font-semibold"
+                        data-test="pokemon-name">{constructedPokemon.name}</h1>
+
+                    {constructedPokemon.color && 
+                        <span 
+                            data-test="pokemon-genre"
+                            className={`
+                                ${getPokemonGenreColor(constructedPokemon.color)}
+                                px-2 rounded-lg text-white mt-1
+                                md:mt-2`}>{constructedPokemon.genre}</span>}
                     
                     <div className="flex justify-between w-full flex-col lg:flex-row">
 
@@ -62,11 +67,11 @@ const Pokemon = () => {
 
                         <div className="flex flex-1 mb-16 lg:m-0">
                             <img src={constructedPokemon.image}
-                                className="object-cover object-center mt-12" alt="Pokemon"/>
+                                className="object-cover object-center mt-12" alt="Pokemon" data-test="pokemon-image"/>
                         </div>
 
                         <div className="flex items-center w-full justify-center flex-1 ">
-                            <PokemonStatusTable 
+                            <PokemonStatsTable 
                                 hp={constructedPokemon.hp} 
                                 attack={constructedPokemon.attack} 
                                 defense={constructedPokemon.defense} 

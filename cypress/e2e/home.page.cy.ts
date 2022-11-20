@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { HomePage } from "../pages/homePage"
+import { HomePage } from "../pages/home.page"
 
 
 describe('home page', () => {

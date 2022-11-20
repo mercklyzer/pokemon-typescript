@@ -19,7 +19,7 @@ const PokemonBasicInfoTable:React.FC<Props> = ({id, height, weight, abilities, t
     const weightInPounds = getWeightInPounds(weightInKilos);
 
     return (
-        <div className="flex items-center justify-center bioDiv">
+        <div className="flex items-center justify-center bioDiv" data-test="pokemon-basic-info-table">
             <div className="flex inner">           
                 <table className="flex">
                     <tbody>
@@ -27,25 +27,25 @@ const PokemonBasicInfoTable:React.FC<Props> = ({id, height, weight, abilities, t
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">ID</td>
                             <td className="text-slate-600 font-medium text-md
-                                lg:text-lg">#{id}</td>
+                                lg:text-lg" data-test="id">#{id}</td>
                         </tr>
                         <tr>
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Height</td>
                             <td className="text-slate-600 font-medium text-md
-                                lg:text-lg">{heightInMeters}m ({heightInFeetInches})</td>
+                                lg:text-lg" data-test="height">{heightInMeters}m ({heightInFeetInches})</td>
                         </tr>
                         <tr>
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Weight</td>
                             <td className="text-slate-600 font-medium text-md
-                                lg:text-lg">{weightInKilos}kg ({weightInPounds}lbs)</td>
+                                lg:text-lg" data-test="weight">{weightInKilos}kg ({weightInPounds}lbs)</td>
                         </tr>
                         <tr>
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Abilities</td>
                             <td className="text-slate-600 font-medium text-md
-                                lg:text-lg">
+                                lg:text-lg" data-test="abilities">
                                 <div className="flex flex-wrap">
                                     {abilities.map(({n}) => 
                                         <div key={n} className={`${getPokemonGenreColor(color)} mr-2 mb-2 text-white p-1 uppercase text-xs
@@ -57,7 +57,7 @@ const PokemonBasicInfoTable:React.FC<Props> = ({id, height, weight, abilities, t
                             <td className="text-right pr-2 py-2 font-bold text-gray-600 text-md 
                                 lg:pr-8 lg:text-lg">Type</td>
                             <td className="text-slate-600 font-medium text-md
-                                lg:text-lg">
+                                lg:text-lg" data-test="type">
                                 <div className="flex flex-wrap">
                                     {types.map(({n}) => <PokemonTypeCard className="mb-2" type={n} key={n} />)}
                                 </div>

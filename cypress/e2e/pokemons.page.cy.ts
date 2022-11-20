@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import { HomePage } from "../pages/homePage"
-import { PokemonsPage } from "../pages/pokemonsPage";
+import { HomePage } from "../pages/home.page"
+import { PokemonsPage } from "../pages/pokemons.page";
 
 describe('pokemons page', () => {
     const homePage = new HomePage();

@@ -1,4 +1,4 @@
-import { Navbar, NavbarElements } from "./navbar";
+import { Navbar, NavbarElements } from "./shared/navbar";
 
 type PokemonType =
     | 'bug'
@@ -27,7 +27,6 @@ interface PokemonsPageElements {
     pokemonTypeFilterIcon: (type: PokemonType) => Cypress.Chainable;
     pokemonFilteredType: () => Cypress.Chainable;
     noPokemonsDisplayed: () => Cypress.Chainable;
-
 };
 
 type PokemonsPageAllElements = NavbarElements & PokemonsPageElements;

@@ -1,4 +1,4 @@
-import { Navbar, NavbarElements } from "./navbar";
+import { Navbar, NavbarElements } from "./shared/navbar";
 
 interface PokemonImageProps{
     width?:number;
