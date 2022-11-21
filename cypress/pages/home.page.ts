@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 import { Navbar, NavbarElements } from "./shared/navbar";
 
 interface PokemonImageProps{
@@ -36,5 +37,4 @@ export class HomePage extends Navbar{
             return cy.viewport(width!, height!).get('[data-test="pokemon-image"]')
         } 
     }
-    
 }

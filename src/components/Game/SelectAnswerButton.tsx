@@ -16,9 +16,9 @@ const SelectAnswerButton:React.FC<Props> = ({answer, className, onClick, isCorre
             ${isGameOver && isCorrect? '!bg-green-primary text-white' : ''}
             ${isCorrect && !isAnswersClickable? '!bg-green-primary text-white' : ''}
             ${isGameOver && selectedAnswer === answer? '!bg-red-300' : ''}
-            
             ${className}`}
-            onClick={() => onClick(answer)}>
+            onClick={() => onClick(answer)}
+            data-test="answer" data-answer-state={`${isCorrect? 'correct':'wrong'}`}>
                 {answer}
         </button>
     );

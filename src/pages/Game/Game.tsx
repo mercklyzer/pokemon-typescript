@@ -95,7 +95,10 @@ const Game:React.FC = () => {
                     <div className="p-6 bg-green-primary rounded-lg relative mt-6">
                         {isSuccess && correctPokemon && <>
                             <div className="px-4 py-2 top-0 left-1/2 bg-red-500 absolute rounded-full -translate-x-1/2 -translate-y-1/2 text-white">{timeRemaining}</div>
-                            {correctPokemon.sprites && !isFetching && <img className={`w-60 ${isGameOver || isShowPokemon? '': 'brightness-0'}`} src={correctPokemon.sprites["front_default"]} alt="Pokemon to guess"/>}
+                            {correctPokemon.sprites && !isFetching && 
+                                <img className={`w-60 ${isGameOver || isShowPokemon? '': 'brightness-0'}`} 
+                                    src={correctPokemon.sprites["front_default"]} alt="Pokemon to guess"
+                                    data-test="pokemon-image"/>}
                             </>
                         }
                         {isFetching && <Oval
@@ -113,11 +116,11 @@ const Game:React.FC = () => {
                     </div>
 
                     <div className="mt-6 flex items-center flex-col">
-                        {isGameOver && <h1 className="text-2xl font-bold mb-2">Game Over!</h1>}
-                        <h2>Highest Score: {highestScore}</h2>
-                        <h2>Current Score: {currentScore}</h2>
+                        {isGameOver && <h1 className="text-2xl font-bold mb-2" data-test="game-over">Game Over!</h1>}
+                        <h2>Highest Score: <span data-test="highest-score">{highestScore}</span></h2>
+                        <h2>Current Score: <span data-test="current-score">{currentScore}</span></h2>
                         {isGameOver && <button className="mt-4 px-4 py-2 bg-black text-white rounded-xl text-sm
-                            md:text-lg" onClick={handlePlayAgain}>Play Again</button>}
+                            md:text-lg" onClick={handlePlayAgain} data-test="play-again-btn">Play Again</button>}
                     </div>
 
                     <div className="grid grid-rows-2 grid-cols-2 gap-6 mt-6">

@@ -25,12 +25,22 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-declare namespace Cypress {
-    interface Chainable {
-        //   login(email: string, password: string): Chainable<void>
-        //   drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-        //   dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-        //   visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-        // shouldBeANumber():Chainable<any>
+
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            /**
+             * @param value - value of data-test attribute
+             * @param optional - optional selector appended to value
+             * @param timeout - optional time to retry - default: 4000ms
+             */
+            getByDataTest(value: string, optional?:string, timeout?:number): Chainable<any>
+        }
     }
 }
+
+Cypress.Commands.add('getByDataTest', (value, optional, timeout = 4000) => {
+    return cy.get(`[data-test="${value}"]${optional? optional:''}`, { timeout })
+})
+
+export { };

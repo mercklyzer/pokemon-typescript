@@ -27,7 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "json-server": "npx json-server ./src/data/index.js -p 3500",
+    "json-server": "npx json-server ./src/data/index.js -p 3500 -H 0.0.0.0",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "npx cypress open"
