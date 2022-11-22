@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 import { Navbar, NavbarElements } from "./shared/navbar";
 
 type PokemonType =
@@ -51,5 +52,30 @@ export class PokemonsPage extends Navbar {
 
     filterByType(type:PokemonType){
         this.elements.pokemonTypeFilterIcon(type).click()
+    }
+
+    findPokemonByScrolling(pokemonName:string, maxScroll:number, scrollCtr = 0){
+        const DEBOUNCE_TIME = 200
+        if(scrollCtr === maxScroll){
+            throw new Error("Pokemon does not exist.")
+        }
+
+        cy.get(`[data-test="pokemon-card"]`).then(($pokemonCards) => {
+            if($pokemonCards.find(`[pokemon-name=${pokemonName}]`).length === 0){
+                this.loadPokemonThumbnails()
+                cy.wait(DEBOUNCE_TIME + 1000)
+                cy.scrollTo('bottom', {duration: 2000})
+                this.findPokemonByScrolling(pokemonName, maxScroll, ++scrollCtr)
+            }
+            else{
+                cy.get(`[pokemon-name=${pokemonName}]`).scrollIntoView({duration: 1000}).should('exist')
+            }
+        })
+    }
+
+    loadPokemonThumbnails(){
+        return cy.get(`[alt="Pokemon Thumbnail"]`, { timeout: 10000 })
+            .and(img => expect((img[0] as HTMLImageElement).naturalHeight).to.be.greaterThan(0))
+        
     }
 }

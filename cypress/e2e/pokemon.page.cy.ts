@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import { wrap } from "module";
 import { PokemonPage } from "../pages/pokemon.page";
 import { PokemonsPage } from "../pages/pokemons.page";
 

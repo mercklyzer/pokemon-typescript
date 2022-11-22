@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+import { Interception } from "cypress/types/net-stubbing";
 import { Navbar, NavbarElements } from "./shared/navbar";
 
 interface GamePageElements {
@@ -11,6 +12,7 @@ interface GamePageElements {
     currentScore: () => Cypress.Chainable;
     gameOver: () => Cypress.Chainable;
     provideCorrectAnswer: () => Cypress.Chainable;
+    loadPokemonImage: () => Cypress.Chainable;
 
 }
 
@@ -28,8 +30,33 @@ export class GamePage extends Navbar{
         gameOver: () => cy.getByDataTest('game-over'),
     }
 
-    provideCorrectAnswer(interceptName:string) {
-        cy.wait(interceptName)
+    provideCorrectAnswer() {
+        return this.loadPokemonImage().then(() => this.elements.correctAnswer().click())
+    }
+
+    provideWrongAnswer() {
+        return this.loadPokemonImage().then(() => this.elements.wrongAnswers().eq(0).click())
+    }
+
+    checkGameOver(){
+        this.elements.gameOver().should('be.visible')
+    }
+
+    playAgain(){
+        this.elements.playAgainBtn().click()
+    }
+
+    waitForQuizItemTimeOut(){
+        const COUNTDOWN_PER_ROUND = 10000;
+        cy.wait(COUNTDOWN_PER_ROUND)
+    }
+
+    validateScore(scoreType: 'currentScore' | 'highestScore', expectedScore: number){
+        this.elements[scoreType]().invoke('text').should('equal', `${expectedScore}`)
+    }
+
+    loadPokemonImage(){
+        return cy.wait('@pokemonRequest')
         .then(() => {
             this.elements.pokemonImage()
             .and(img => expect(img[0].naturalHeight).to.be.eq(0))
@@ -37,7 +64,6 @@ export class GamePage extends Navbar{
             .and(img => expect(img[0].naturalHeight).to.be.greaterThan(0))
             .then(() => {
                 cy.wait(1000)
-                this.elements.correctAnswer().click()
             })
         })
     }

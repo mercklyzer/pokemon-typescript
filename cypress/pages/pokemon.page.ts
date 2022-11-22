@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 import { Navbar, NavbarElements } from "./shared/navbar"
 
 interface PokemonPageElements {

@@ -18,8 +18,8 @@ const PokemonCard:React.FC<Props> = ({id, name, types, thumbnail, onPokemonTypeI
             hover:bg-gray-200 duration-200
             md:p-2" 
             onClick={() => navigate(`/pokemons/${id}`)}
-            data-test="pokemon-card">
-            <div className="flex">
+            data-test="pokemon-card" pokemon-types={`${types.map(type => type.n)}`} >
+            <div className="flex" pokemon-name={name}>
                 <div className="flex-1 flex flex-col">
                     <h1 className="font-bold text-zinc-500 text-lg
                         md:text-xl">{id}</h1>

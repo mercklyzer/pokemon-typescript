@@ -11,6 +11,8 @@ describe('pokemons page', () => {
         cy.visit('/')
         homePage.elements.pokemonsListBtn()
             .click()
+
+        cy.intercept('http://localhost:3500/pokemons**').as('pokemonsRequest')
     })
 
     it("Navigated to list of pokemons", () => {
@@ -26,8 +28,41 @@ describe('pokemons page', () => {
     it("Infinitie Scroll on Pokemons", () => {
         pokemonsPage.elements.pokemonCard().should('have.length', 20)
         cy.wait(500) // wait for images to load (workaround)
-        cy.scrollTo('bottom')
+        cy.scrollTo('bottom', {duration: 2000})
         pokemonsPage.elements.pokemonCard().should('have.length', 40)
+    })
+
+    it("Search pokemon using infinite scroll", () => {
+        pokemonsPage.loadPokemonThumbnails()
+        pokemonsPage.findPokemonByScrolling('grimer', 10)
+    })
+
+    it.only("FAILED search pokemon using infinite scroll", () => {
+        pokemonsPage.loadPokemonThumbnails()
+        pokemonsPage.findPokemonByScrolling('grimer', 2)
+    })
+
+    it("Filter pokemon by type", () => {
+
+        pokemonsPage.filterByType('electric')
+        pokemonsPage.elements.pokemonFilteredType().should('contain', 'electric')
+        
+        pokemonsPage.elements.pokemonCard().should(pokemon => {
+            expect(pokemon).to.have.length.greaterThan(0)
+            expect(pokemon).to.have.length.lessThan(21)
+        }).each((pokemon) => {
+            expect(pokemon).attr('pokemon-types').contain('electric')
+        })
+
+        pokemonsPage.filterByType('water')
+        pokemonsPage.elements.pokemonFilteredType().should('contain', 'water')
+
+        pokemonsPage.elements.pokemonCard().should(pokemon => {
+            expect(pokemon).to.have.length.greaterThan(0)
+            expect(pokemon).to.have.length.lessThan(21)
+        }).each((pokemon) => {
+            expect(pokemon).attr('pokemon-types').contain('water')
+        })
     })
 
     it("Search pokemon by type and name", () => {
@@ -46,8 +81,10 @@ describe('pokemons page', () => {
         pokemonsPage.elements.pokemonCard().should('have.length.at.most', 20)
         pokemonsPage.searchPokemon('slow')
         pokemonsPage.elements.pokemonCard().should('have.length', 3)  
-        pokemonsPage.clearFilters()     
-        
+        pokemonsPage.clearFilters()
+    })
+
+    it("No pokemon to display", () => {
         pokemonsPage.searchPokemon('slowpokemon')
         pokemonsPage.elements.pokemonCard().should('not.exist')
         pokemonsPage.elements.noPokemonsDisplayed().contains('No pokemons to be displayed.').should('be.visible')
