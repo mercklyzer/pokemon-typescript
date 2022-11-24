@@ -39,11 +39,10 @@ describe('pokemons page', () => {
 
     it.only("FAILED search pokemon using infinite scroll", () => {
         pokemonsPage.loadPokemonThumbnails()
-        pokemonsPage.findPokemonByScrolling('grimer', 2)
+        pokemonsPage.findPokemonByScrolling('grimer', 2, undefined, true)
     })
 
     it("Filter pokemon by type", () => {
-
         pokemonsPage.filterByType('electric')
         pokemonsPage.elements.pokemonFilteredType().should('contain', 'electric')
         

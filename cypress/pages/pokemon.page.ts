@@ -92,4 +92,46 @@ export class PokemonPage extends Navbar {
         const statsValueFields:NumberField[] = ['hpValue','attackValue','defenseValue','spAttackValue','spDefenseValue','speedValue','totalValue'];
         statsValueFields.forEach(field => this.shouldBeANumber(field))
     }
+
+    verifyBasicInfo(){
+        this.elements.basicInfo()
+            .should($info => {
+                expect($info).to.contain('ID')
+                expect($info).to.contain('Height')
+                expect($info).to.contain('Weight')
+                expect($info).to.contain('Abilities')
+                expect($info).to.contain('Type')
+            })
+        
+        // ^Another syntax:
+            // .should('contain', 'ID')
+            // .should('contain', 'Height')
+            // .should('contain', 'Weight')
+            // .should('contain', 'Abilities')
+            // .should('contain', 'Type')
+
+        // ^Another syntax:
+            // .should('contain', 'ID')
+            // .and('contain', 'Height')
+            // .and('contain', 'Weight')
+            // .and('contain', 'Abilities')
+            // .and('contain', 'Type')
+    }
+
+    verifyStats(){
+        this.elements.hpHeader().should('exist')
+        this.statsShouldBeNumbers();
+
+        this.elements.minBtn().click()
+        cy.wait(3000)
+        this.statsShouldBeNumbers();
+
+        this.elements.maxBtn().click()
+        cy.wait(3000)
+        this.statsShouldBeNumbers();
+
+        this.elements.baseBtn().click()
+        cy.wait(3000)
+        this.statsShouldBeNumbers();
+    }
 }
