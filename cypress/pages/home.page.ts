@@ -38,15 +38,6 @@ export class HomePage extends Navbar{
         } 
 
     }
-    navbarIsDisplaying(){
-        this
-            .elements.navbar()
-            .should('be.visible')
-
-        this.
-            elements.pokemonLogo()
-            .should('be.visible')
-    }
 
     titleIsDisplaying(){
         this.elements.title()
@@ -66,10 +57,8 @@ export class HomePage extends Navbar{
     }
 
     pokemonsListBtnIsDisplaying(){
-
+        this.elements.pokemonsListBtn()
+            .should('be.visible')
     }
     
-    pokemonImageIsDisplaying(){
-
-    } 
 }

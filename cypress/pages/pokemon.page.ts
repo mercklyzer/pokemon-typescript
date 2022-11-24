@@ -80,6 +80,13 @@ export class PokemonPage extends Navbar {
         maxBtn: () => cy.get('[data-test="max-btn"]'),
     }
 
+    storePathId(){
+        cy.location('pathname').then(path => {
+            let id = (path as unknown as string).split('/').at(-1)
+            cy.wrap({id}).as('pathId')
+        })
+    }
+
     shouldBeANumber(field:NumberField){
         this.elements[field]()
             .should('exist')
@@ -116,8 +123,44 @@ export class PokemonPage extends Navbar {
             // .and('contain', 'Weight')
             // .and('contain', 'Abilities')
             // .and('contain', 'Type')
+
+        this.verifyDisplayedId()
+        this.verifyDisplayedHeight()
+        this.verifyDisplayedWidth()
+        this.verifyDisplayedAbilities()
+        this.verifyDisplayedTypes()
     }
 
+    verifyDisplayedId(){
+        this.elements.id().invoke('text')
+        .then(text => {
+            const cleanId = text.replace('#', '')
+            cy.get('@pathId').then(pathId => {
+                expect(cleanId).to.be.eq((pathId as any).id)
+            })
+        })
+    }
+
+    verifyDisplayedHeight(){
+        this.elements.height().should('contain', 'm')
+    }
+
+    verifyDisplayedWidth(){
+        this.elements.weight()
+            .should('contain', 'lbs')
+            .and('contain', 'kg')
+    }
+
+    verifyDisplayedAbilities(){
+        this.elements.abilities().should('have.length.at.least', 1)
+    }
+
+    verifyDisplayedTypes(){
+        this.elements.type().should('have.length.at.least', 1)
+    }
+    
+    // LIMITATION: Cypress can't trigger CSS animations on :hover
+    // https://docs.cypress.io/api/commands/hover
     verifyStats(){
         this.elements.hpHeader().should('exist')
         this.statsShouldBeNumbers();

@@ -35,7 +35,7 @@ type PokemonsPageAllElements = NavbarElements & PokemonsPageElements;
 export class PokemonsPage extends Navbar {
     elements: PokemonsPageAllElements = {
         ...this.elements,
-        pokemonCard: (pokemon?:string) => cy.get(`[data-test="pokemon-card"] > ${pokemon? '[pokemon-name=' + pokemon + ']' : ''}`),
+        pokemonCard: (pokemon?:string) => cy.get(`[data-test="pokemon-card"] ${pokemon? '> [pokemon-name=' + pokemon + ']' : ''}`),
         clearFiltersBtn: () => cy.get('[data-test="clear-filters-btn"]'),
         pokemonTypeFilterIcon: (type: PokemonType) => cy.get(`[data-test="pokemon-type-filter"] > [data-test="pokemon-${type}-icon"]`),
         pokemonFilteredType: () => cy.get('[data-test="pokemon-filtered-type"]'),
@@ -54,11 +54,11 @@ export class PokemonsPage extends Navbar {
         this.elements.pokemonTypeFilterIcon(type).click()
     }
 
-    findPokemonByScrolling(pokemonName:string, maxScroll:number, scrollCtr = 0, shouldNotExist = false){
+    findPokemonByScrolling(pokemonName:string, maxPage:number, pageCtr = 1, shouldExist = true){
         const DEBOUNCE_TIME = 200
-        console.log(scrollCtr, maxScroll)
-        if(scrollCtr === maxScroll){
-            if(!shouldNotExist){
+
+        if(pageCtr === maxPage){
+            if(shouldExist){
                 throw new Error("Pokemon does not exist.")
             }
             else{
@@ -68,22 +68,25 @@ export class PokemonsPage extends Navbar {
             }
         }
 
-        cy.get(`[data-test="pokemon-card"]`).then(($pokemonCards) => {
+        cy.getByDataTest("pokemon-card").then(($pokemonCards) => {
             if($pokemonCards.find(`[pokemon-name=${pokemonName}]`).length === 0){
                 this.loadPokemonThumbnails()
-                cy.wait(DEBOUNCE_TIME + 1000)
                 cy.scrollTo('bottom', {duration: 2000})
-                this.findPokemonByScrolling(pokemonName, maxScroll, ++scrollCtr, shouldNotExist)
+                cy.wait(DEBOUNCE_TIME + 1000)
+                this.findPokemonByScrolling(pokemonName, maxPage, ++pageCtr, shouldExist)
             }
             else{
-                cy.get(`[pokemon-name=${pokemonName}]`).scrollIntoView({duration: 1000}).should('exist')
+                cy.get(`[pokemon-name=${pokemonName}]`).should('exist').scrollIntoView({duration: 1000})
             }
         })
     }
 
-
     loadPokemonThumbnails(){
         return cy.get(`[alt="Pokemon Thumbnail"]`, { timeout: 10000 })
             .and(img => expect((img[0] as HTMLImageElement).naturalHeight).to.be.greaterThan(0))
+    }
+
+    getNthPokemonCard(n = 0){
+        return this.elements.pokemonCard().eq(n)
     }
 }

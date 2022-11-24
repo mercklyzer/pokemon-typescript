@@ -25,18 +25,21 @@ describe('home page', () => {
         gamePage.loadPokemonImage()
         gamePage.waitForQuizItemTimeOut()
         gamePage.checkGameOver()
-        gamePage.validateScore("currentScore", 3)   
+        gamePage.validateScore("currentScore", 3) 
+        gamePage.validateScore("highestScore", 3)
     })
 
-    it('3 Correct Pokemons and 1 Wrong Pokemon', () => {
-        gamePage.provideCorrectAnswer()
+    it('2 Correct Pokemons and 1 Wrong Pokemon', () => {
+
         gamePage.provideCorrectAnswer()
         gamePage.provideCorrectAnswer()
 
         gamePage.provideWrongAnswer()
 
         gamePage.checkGameOver()
-        gamePage.validateScore("currentScore", 3)
+        gamePage.validateScore("currentScore", 2)
+        gamePage.validateScore("highestScore", 2)
+
     })
 
     it('1 Correct Pokemon, 1 Wrong Pokemon, Play Again, 1 Wrong Pokemon', () => {
@@ -54,7 +57,7 @@ describe('home page', () => {
         gamePage.validateScore('currentScore', 0)
     })
 
-    it('Persistent Highest Score,', () => {
+    it.only('Persistent Highest Score,', () => {
         gamePage.provideCorrectAnswer()
         gamePage.provideCorrectAnswer()
         gamePage.provideCorrectAnswer()
@@ -62,7 +65,7 @@ describe('home page', () => {
         gamePage.validateScore('highestScore', 3)
         gamePage.validateScore('currentScore', 3)
         
-        cy.wait(1000)
+        cy.pause()
         cy.reload()
 
         gamePage.validateScore('highestScore', 3)

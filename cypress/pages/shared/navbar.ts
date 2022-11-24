@@ -15,4 +15,15 @@ export class Navbar {
         this.elements.pokemonSearchBox()
             .type(pokemon)
     }
+
+    navbarIsDisplaying(){
+        this
+            .elements.navbar()
+            .should('be.visible')
+
+        this.
+            elements.pokemonLogo()
+            .should('be.visible')
+    }
+
 }

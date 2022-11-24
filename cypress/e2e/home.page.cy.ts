@@ -16,10 +16,16 @@ describe('home page', () => {
         homePage.subtitleIsDisplaying()
         homePage.playGameBtnIsDisplaying()
         homePage.pokemonsListBtnIsDisplaying()
-        homePage.pokemonImageIsDisplaying()
+
+        homePage.elements.pokemonImage({device: 'iphone-xr'})
+            .should('be.hidden')
+        homePage.elements.pokemonImage({device: 'macbook-13'})
+            .should('be.visible')
     })
 
     // BAD PRACTICE -> resetting a test is expensive. This should be done in unit tests
+    // Anti-Pattern: Acting like you're writing unit tests.
+
     // it('Displaying navbar and only showing pokemon logo', () => {
     //     homePage
     //         .elements.navbar()
