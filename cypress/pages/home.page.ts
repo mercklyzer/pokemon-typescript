@@ -36,5 +36,40 @@ export class HomePage extends Navbar{
 
             return cy.viewport(width!, height!).get('[data-test="pokemon-image"]')
         } 
+
     }
+    navbarIsDisplaying(){
+        this
+            .elements.navbar()
+            .should('be.visible')
+
+        this.
+            elements.pokemonLogo()
+            .should('be.visible')
+    }
+
+    titleIsDisplaying(){
+        this.elements.title()
+            .contains("Who's That Pokemon?")
+            .should('be.visible')
+    }
+
+    subtitleIsDisplaying(){
+        this.elements.subtitle()
+            .contains("Do you have what it takes to be the next Pokemon Master? Let's put your skills to test! Identify as many pokemons as you can.")
+            .should('be.visible')
+    }
+    
+    playGameBtnIsDisplaying(){
+        this.elements.playGameBtn()
+            .should('be.visible')
+    }
+
+    pokemonsListBtnIsDisplaying(){
+
+    }
+    
+    pokemonImageIsDisplaying(){
+
+    } 
 }

@@ -95,7 +95,5 @@ describe('Pokemon Page', () => {
         pokemonPage.elements.baseBtn().click()
         cy.wait(3000)
         pokemonPage.statsShouldBeNumbers();
-
-
     })
 })

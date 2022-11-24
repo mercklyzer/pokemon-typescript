@@ -76,6 +76,5 @@ export class PokemonsPage extends Navbar {
     loadPokemonThumbnails(){
         return cy.get(`[alt="Pokemon Thumbnail"]`, { timeout: 10000 })
             .and(img => expect((img[0] as HTMLImageElement).naturalHeight).to.be.greaterThan(0))
-        
     }
 }
