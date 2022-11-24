@@ -1,7 +1,11 @@
 /// <reference types="cypress" />
 
-import { Interception } from "cypress/types/net-stubbing";
+// workaround - has to declare on every file
+/// <reference types="../support"/> 
+
+
 import { Navbar, NavbarElements } from "./shared/navbar";
+
 
 interface GamePageElements {
     pokemonImage: () => Cypress.Chainable;

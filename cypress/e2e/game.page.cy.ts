@@ -8,6 +8,13 @@ describe('home page', () => {
     beforeEach(() => {
         cy.visit('/game')
         cy.intercept('https://pokeapi.co/api/v2/pokemon/**').as('pokemonRequest')
+
+        cy.wait('@pokemonRequest').its('response').then(res => {
+            // res!.statusCode = 404;
+            if(res!.statusCode !== 200 && res!.statusCode !== 304){
+                throw new Error('API Request Failed')
+            }
+        })
     })
 
     it('3 Correct Pokemons and Timeout', () => {
@@ -47,7 +54,7 @@ describe('home page', () => {
         gamePage.validateScore('currentScore', 0)
     })
 
-    it.only('Persistent Highest Score,', () => {
+    it('Persistent Highest Score,', () => {
         gamePage.provideCorrectAnswer()
         gamePage.provideCorrectAnswer()
         gamePage.provideCorrectAnswer()

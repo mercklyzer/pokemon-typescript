@@ -64,6 +64,10 @@ describe('pokemons page', () => {
         })
     })
 
+    it("Search pokemon by name", () => {
+        
+    })
+
     it("Search pokemon by type and name", () => {
         pokemonsPage.elements.pokemonFilteredType().should('contain', 'All')
         pokemonsPage.searchPokemon("pikac")
@@ -80,7 +84,6 @@ describe('pokemons page', () => {
         pokemonsPage.elements.pokemonCard().should('have.length.at.most', 20)
         pokemonsPage.searchPokemon('slow')
         pokemonsPage.elements.pokemonCard().should('have.length', 3)  
-        pokemonsPage.clearFilters()
     })
 
     it("No pokemon to display", () => {
